@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANI's Cafe Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>ANI's HiFi Cafe Menu</h1>
+  <div class="container">
+    <div class="sidebar">
+      <div class="section">
+        <h2>Most Popular</h2>
+        {% if most_popular %}
+        <ol>
+          {% for item in most_popular %}
+            <li>{{ item.name }} ({{ item.count }} orders)</li>
+          {% endfor %}
+        </ol>
+        {% else %}
+        <p>No data yet.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <form id="menu" method="POST" action="/place_order" class="menu">
+      <input type="hidden" name="order_data" id="order-data">
+
+      <h2>Veg Dishes</h2>
+      {% for item in menu %}
+        {% if item._id in [1,2,3,4,5] %}
+          <div class="menu-item">
+            <label>{{ item.name }} - ₹{{ item.price }}</label>
+            <div>
+              <input type="number" name="{{ item._id }}" min="0" value="0">
+              <button type="button" onclick="addToOrder('{{ item.name }}', {{ item.price }}, '{{ item._id }}')">Add</button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <h2>Non-Veg Dishes</h2>
+      {% for item in menu %}
+        {% if item._id in [6,7,8,9,10] %}
+          <div class="menu-item">
+            <label>{{ item.name }} - ₹{{ item.price }}</label>
+            <div>
+              <input type="number" name="{{ item._id }}" min="0" value="0">
+              <button type="button" onclick="addToOrder('{{ item.name }}', {{ item.price }}, '{{ item._id }}')">Add</button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <h2>Beverages & Extras</h2>
+      {% for item in menu %}
+        {% if item._id in [11,12,13,14,15] %}
+          <div class="menu-item">
+            <label>{{ item.name }} - ₹{{ item.price }}</label>
+            <div>
+              <input type="number" name="{{ item._id }}" min="0" value="0">
+              <button type="button" onclick="addToOrder('{{ item.name }}', {{ item.price }}, '{{ item._id }}')">Add</button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </form>
+
+    <div class="cart">
+      <h2>Your Order</h2>
+      <ul id="order-list"></ul>
+      <p id="order-total"></p>
+      <button class="submit" type="submit" form="menu">Place Order</button>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

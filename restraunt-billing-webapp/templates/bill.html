@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bill - ANI's Pixel Cafe</title>
+  <style>
+    body {
+      background-color: #f4e8d1;
+      font-family: 'Courier New', monospace;
+      color: #3e2c1c;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 10px;
+      border-bottom: 3px double #3e2c1c;
+      padding-bottom: 5px;
+    }
+
+    .bill-container {
+      background-color: #fffaf2;
+      border: 3px solid #3e2c1c;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #3e2c1c;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ffecc7;
+    }
+
+    .totals {
+      margin-top: 20px;
+    }
+
+    .totals p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    .customer-info {
+      margin-top: 15px;
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #fef6e4;
+      border: 2px dashed #3e2c1c;
+    }
+
+    .print-button {
+      display: block;
+      margin: 20px auto 0;
+      background-color: #d4a373;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .print-button:hover {
+      background-color: #c98c5c;
+    }
+
+    @media print {
+      .print-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bill-container">
+    <h1>ANI's HiFi Cafe</h1>
+
+    <p><strong>Order ID:</strong> {{ order_id }}</p>
+    <p><strong>Date & Time:</strong> {{ time }}</p>
+
+    <!-- Customer Info -->
+    <div class="customer-info">
+      <p><strong>Customer Name:</strong> {{ customer.name }}</p>
+      <p><strong>Phone Number:</strong> {{ customer.phone }}</p>
+      <p><strong>Order Type:</strong> {{ customer.order_type }}</p>
+      <p><strong>Payment Method:</strong> {{ customer.payment }}</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.qty }}</td>
+          <td>₹{{ item.unit_price }}</td>
+          <td>₹{{ item.total }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <p><strong>Subtotal:</strong> ₹{{ subtotal }}</p>
+      <p><strong>GST (5%):</strong> ₹{{ gst }}</p>
+      <p><strong>Total:</strong> ₹{{ total }}</p>
+    </div>
+
+    <button class="print-button" onclick="window.print()">Print Bill</button>
+  </div>
+
+</body>
+</html>

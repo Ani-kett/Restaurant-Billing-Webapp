@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome - ANI's Pixel Cafe</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'VT323', monospace;
+      background-color: #f8f1e4;
+      color: #3e2c1c;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      max-width: 500px;
+      width: 100%;
+      background: #fff8dc;
+      padding: 30px;
+      border: 3px solid #3e2c1c;
+      box-shadow: 6px 6px 0 #3e2c1c;
+    }
+    h1 {
+      font-size: 48px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    label {
+      font-size: 24px;
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 20px;
+      border: 2px solid #3e2c1c;
+      background-color: #fffaf0;
+    }
+    .radio-group {
+      margin-bottom: 15px;
+    }
+    .radio-group input {
+      width: auto;
+      margin-right: 10px;
+    }
+    button {
+      background-color: #a0522d;
+      color: white;
+      font-size: 24px;
+      border: 3px solid #3e2c1c;
+      padding: 10px 20px;
+      font-family: 'VT323', monospace;
+      margin-top: 20px;
+      width: 100%;
+      box-shadow: 4px 4px 0 #3e2c1c;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #8b4513;
+    }
+  </style>
+</head>
+<body>
+  <form class="form-container" action="/start_order" method="post">
+    <h1>ANI's HiFi Cafe</h1>
+    
+    <label for="name">Customer Name</label>
+    <input type="text" name="name" required />
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" name="phone" required pattern="[0-9]{10}" />
+
+    <label>Order Type</label>
+    <div class="radio-group">
+      <label><input type="radio" name="order_type" value="Dine-In" required /> Dine-In</label>
+      <label><input type="radio" name="order_type" value="Takeaway" /> Takeaway</label>
+      <label><input type="radio" name="order_type" value="Delivery" /> Delivery</label>
+    </div>
+
+    <label>Payment Method</label>
+    <div class="radio-group">
+      <label><input type="radio" name="payment" value="Cash" required /> Cash</label>
+      <label><input type="radio" name="payment" value="UPI" /> UPI</label>
+      <label><input type="radio" name="payment" value="Card" /> Card</label>
+    </div>
+
+    <button type="submit">Proceed to Menu</button>
+  </form>
+</body>
+</html>
